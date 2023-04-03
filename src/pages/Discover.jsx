@@ -1,15 +1,17 @@
 import { Error,Loader, SongCard } from "../components"
 import { genres } from "../assets/constants"
-
+import { useDispatch, useSelector } from "react-redux";
 import { useGetTop100Query } from "../redux/services/shazamCore";
-
 
 const Discover = () => {
 
+    const dispatch = useDispatch()
+    const { activeSong, isPlaying } = useSelector((state)=>state.player)
     const gentreTitle = "hip-pop"
     const {data, isFetching, error} = useGetTop100Query()
+    console.log(data);
 
-    let dataKeys = Object.entries(data)
+    // let dataKeys = Object.entries(data)
 
     if (isFetching) return <Loader title="Loading songs ... " />
     if (error) return <Error/>
@@ -35,11 +37,14 @@ const Discover = () => {
         </div>
 
         <div className="flex flex-wrap sm:justify-start justify-center gap-8" >
-            {dataKeys.map((item, i) => (
+            {data.items.map((item, i) => (
                 <SongCard
-                    key={item.track.id}
+                    data={data.items}
+                    key={item.tracks}
                     i={i}
                     song={item}
+                    isPlaying={isPlaying}
+                    activeSong={activeSong}
                 />
             ))}
         </div>
