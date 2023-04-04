@@ -14,7 +14,21 @@ export const shazamCoreAPI = createApi({
     }) 
 })
 
+// export const billboardChats = createApi({
+//     reducerPath:"billboardCharts",
+//     baseQuery:fetchBaseQuery({
+//         baseUrl:"https://shazam.p.rapidapi.com",
+//         prepareHeaders:(headers) => {
+//             headers.set('X-RapidAPI-Key', 'd349022226mshe51878db5478fa0p1bd6adjsn922c3fc6f190')
+//             return headers
+//         } 
+//     }), 
+//     endpoints:(builder) => ({
+//         getCharts: builder.query({query:()=>"/charts/track"})
+//     })
+// })
 
 export const {
     useGetTop100Query,
+    // useGetChartsQuery,
 } = shazamCoreAPI
